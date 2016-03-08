@@ -1,0 +1,27 @@
+<footer id="site-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="copyright">&copy; 2014 ThemeWagon.com -More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Mobile Menu -->
+        <div class="overlay overlay-hugeinc">
+            <button type="button" class="overlay-close"><span class="ion-ios-close-empty"></span></button>
+            <nav>
+                <ul>
+		<li><a href="index.html">Home</a></li>
+		<% for(i=0; i< navigations.length; i++) {%>                     
+                    <li><a href="<%= navigations[i].navigations_url %>"><%= navigations[i].navigations_names %></a></li>                    
+		 <% } %> 
+                </ul>
+            </nav>
+        </div>
+
+        <script src="js/script.js"></script>
+
+    </body>
+</html>
