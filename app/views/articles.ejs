@@ -1,0 +1,29 @@
+<% include header %>
+
+		<div class="content-body">
+			<div class="container">
+				<div class="row">
+					<main class="col-md-8">
+						<article class="post post-1">
+							<header class="entry-header">
+								<h1 class="entry-title">Adaptive Vs. Responsive Layouts And Optimal Text Readability</h1>
+								<div class="entry-meta">
+									<span class="post-category"><a href="#"><%= articles.articles_category %></a></span>
+			
+									<span class="post-date"><a href="#"><time class="entry-date" datetime="<%= articles.createtime.toLocaleDateString() %>"><%= articles.createtime.toLocaleDateString() %></time></a></span>
+			
+									<span class="post-author"><a href="#"><%= articles.author %></a></span>
+			
+									<span class="comments-link"><a href="#">4 Comments</a></span>
+								</div>
+							</header>
+							<div class="entry-content clearfix">
+								<%= articles.articles_text %>
+							</div>
+						</article>
+					</main>
+					<% include aside %>
+				</div>
+			</div>
+		</div>
+<% include footer %>

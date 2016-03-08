@@ -22,55 +22,14 @@
 							<div class="entry-content clearfix">
 								<p><%= articles[i].articles_text.substring(0,100) %></p>
 								<div class="read-more cl-effect-14">
-									<a href="#" class="more-link">Continue reading <span class="meta-nav">→</span></a>
+									<a href="/articles/<%= articles[i]._id %>" class="more-link">Continue reading <span class="meta-nav">→</span></a>
 								</div>
 							</div>
 						</article>
 					<% } %> 
 						
 					</main>
-					<aside class="col-md-4">
-						<div class="widget widget-recent-posts">		
-							<h3 class="widget-title">Hot Posts</h3>		
-							<ul>
-								<li>
-									<a href="#">Adaptive Vs. Responsive Layouts And Optimal Text Readability</a>
-								</li>
-								<li>
-									<a href="#">Web Design is 95% Typography</a>
-								</li>
-								<li>
-									<a href="#">Paper by FiftyThree</a>
-								</li>
-							</ul>
-						</div>
-						<div class="widget widget-archives">		
-							<h3 class="widget-title">Archives</h3>		
-							<ul>
-								<li>
-									<a href="#">November 2014</a>
-								</li>
-								<li>
-									<a href="#">September 2014</a>
-								</li>
-								<li>
-									<a href="#">January 2013</a>
-								</li>
-							</ul>
-						</div>
-
-						<div class="widget widget-category">		
-							<h3 class="widget-title">Category</h3>		
-							<ul>
-							<% for(i=0; i< categorys.length; i++) {%> 
-								<li>
-									<a href="<%= categorys[i].categorys_url %>"><%= categorys[i].categorys_name %></a>
-								</li>
-							<% } %>
-								
-							</ul>
-						</div>
-					</aside>
+					<% include aside %>
 				</div>
 			</div>
 		</div>

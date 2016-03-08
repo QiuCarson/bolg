@@ -47,7 +47,7 @@ Articles.find(function (err, rs){
 
 
 
-router.get('/', function (req, res, next) {
+router.get('/articles/:articles_id', function (req, res, next) {
 
 
   Options.findOne({options_names:"index_options_title"},function (err, index_options_title) {
@@ -75,15 +75,19 @@ router.get('/', function (req, res, next) {
 		
 	}
   });
-  
-	
+  console.log(req.params.categorys_url);
+
 	//ндуб
-	Articles.find(function (err, articles) {
+	/*Articles.findOne({_id:req.params.articles_id},function (err, articles) {
 		if (err) return next(err);	
 		rs_articles=articles;
-	}).sort({'createtime':-1}).limit(5);
-
-  res.render('index', {
+	});*/
+	Articles.findById(req.params.articles_id,function (err, articles) {
+		if (err) return next(err);	
+		rs_articles=articles;
+	});
+console.log(rs_articles);
+  res.render('articles', {
       options_keyword: rs_index_options_keyword,
 	  options_title: rs_index_options_title,
 	  options_description: rs_index_options_description,
@@ -95,5 +99,3 @@ router.get('/', function (req, res, next) {
   
    
 });
-
-

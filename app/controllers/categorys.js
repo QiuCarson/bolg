@@ -82,7 +82,7 @@ router.get('/categorys/:categorys_url', function (req, res, next) {
 		if (err) return next(err);	
 		rs_articles=articles;
 	}).sort({'createtime':-1}).limit(5);
-
+console.log(rs_articles);
   res.render('index', {
       options_keyword: rs_index_options_keyword,
 	  options_title: rs_index_options_title,
