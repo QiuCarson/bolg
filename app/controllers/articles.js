@@ -7,6 +7,7 @@ var express = require('express'),
   Articles = mongoose.model('Articles');
 
 module.exports = function (app) {
+	
   app.use('/', router);
 };
 rs_index_options_keyword='';
@@ -17,9 +18,9 @@ rs_index_options_description='';
 options_description='';
 rs_categorys='';
 categorys='';
+
 articles='';
 rs_articles='';
-
 
 
 /***À¸Ä¿*****/
@@ -27,7 +28,7 @@ rs_articles='';
 		if (err) return next(err);	
 		rs_categorys=categorys;
 	});
-
+console.log(rs_categorys);
 navigations='';
 rs_navigations='';
 /***µ¼º½***/
@@ -43,7 +44,6 @@ Articles.find(function (err, rs){
 	if (err) return next(err);
 	articles_right_date=rs;
 } ).distinct("articles_date");
-
 
 
 
@@ -75,17 +75,32 @@ router.get('/articles/:articles_id', function (req, res, next) {
 		
 	}
   });
-  console.log(req.params.categorys_url);
+  console.log(req.params.articles_id);
 
 	//ÎÄÕÂ
 	/*Articles.findOne({_id:req.params.articles_id},function (err, articles) {
 		if (err) return next(err);	
 		rs_articles=articles;
 	});*/
-	Articles.findById(req.params.articles_id,function (err, articles) {
-		if (err) return next(err);	
+	//obj="ObjectId(56df86c231fbb16c1e5cce7d)";
+	//id=mongoose.Schame.ObjectId(req.params.articles_id);
+	//var id=new ObjectID("56df86c231fbb16c1e5cce7d");
+	//var ObjectID = require('mongoose').ObjectID;
+	//var id=Articles.Types.ObjectId("56df86c231fbb16c1e5cce7d");
+	
+	//id="56df86c231fbb16c1e5cce7d";
+	id=req.params.articles_id;
+	console.log(id);
+
+	/*Articles.findById(id,function (err, articles) {
+		if (err) return next(err);
+		//console.log(articles);
 		rs_articles=articles;
-	});
+	});*/
+	Articles.findOne({_id:id},function(err, articles){
+		rs_articles=articles;
+		//console.log(articles.articles_category);
+	})
 console.log(rs_articles);
   res.render('articles', {
       options_keyword: rs_index_options_keyword,
@@ -97,5 +112,6 @@ console.log(rs_articles);
 	  articles_right_date:articles_right_date
    });
   
+ 
    
 });
