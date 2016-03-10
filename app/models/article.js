@@ -5,14 +5,15 @@ var mongoose = require('mongoose'),
 
 var ArticlesSchema = new Schema({
 	//_id:  Schema.Types.ObjectId ,
-  articles_title: String,
+  articles_title: {type:String,required: true},
   articles_url: String,
   articles_text: String,
-  createtime:Date,
+  createtime:{type:Date, default: Date.now},
   author:String,
   articles_category:String,
   articles_click:String,
-  articles_date:Date
+  articles_date:Date,
+  orderby:{type: Number},
 });
 
 ArticlesSchema.virtual('date')

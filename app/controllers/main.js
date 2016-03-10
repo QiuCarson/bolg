@@ -8,7 +8,7 @@ var Paginate = require("../../common/paginate");
 module.exports = function (app) {
   app.use('/', router);
 };
-var pagesize=2;
+var pagesize=7;
 router.get('/admin*',checkLogin);
 router.get('/admin/index', function (req, res, next) {	
   res.render("admin/index");
@@ -29,19 +29,24 @@ router.get('/admin/articles', function (req, res, next) {
 		count:articles_count,
 		page:page,
 		maxpage:Math.ceil(articles_count/pagesize),
-		pagehtml:pagehtml.phtml
+		pagehtml:pagehtml.phtml,
+		pagesize:pagesize
 		});
 	}).sort({'_id':-1}).skip((page - 1)*pagesize).limit(pagesize);
 	
 	
 });
+router.post('/admin/articles_do', function (req, res, next) {
+	title=req.body.articles_title;
+})
 
 router.get('/admin/articles_add', function (req, res, next) {
   /***À¸Ä¿*****/
 	Categorys.find({categorys_name:{$ne:null}},function (err, rs) {
 		if (err) return next(err);	
 		categorys=rs;
-		res.render("admin/articles_add",{categorys:categorys});
+		//console.log(req.session.admininfo.users_password);
+		res.render("admin/articles_add",{categorys:categorys,author:req.session.admininfo.users_username});
 	});
   
 });
@@ -63,6 +68,7 @@ router.post('/admin/articles_add_do', function (req, res, next) {
 	})
   
 });
+
 
 list='';
 count='';
@@ -86,7 +92,8 @@ router.get('/admin/categorys', function (req, res, next) {
 			count:categorys_count,
 			page:page,
 			maxpage:Math.ceil(categorys_count/pagesize),
-			pagehtml:pagehtml.phtml
+			pagehtml:pagehtml.phtml,
+			pagesize:pagesize
 		});
 	}).sort({'_id':-1}).skip((page - 1)*pagesize).limit(pagesize);
 	
@@ -114,8 +121,7 @@ router.post('/admin/categorys_add_do', function (req, res, next) {
 
 
 
-function checkLogin(req, res, next) {
-	//console.log(req.session.admininfo);
+function checkLogin(req, res, next) {	
   if (!req.session.admininfo) {
     //res.redirect('/login');
   }

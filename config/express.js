@@ -27,7 +27,7 @@ module.exports = function(app, config) {
   app.use(cookieParser());
   app.use(compress());
 
-app.use(session({ secret: 'test', cookie: { maxAge: 60000 }}))
+app.use(session({ secret: 'test', cookie: { maxAge: 60000*60 }}))
 
   app.use(express.static(config.root + '/public'));
   app.use(methodOverride());

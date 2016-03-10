@@ -6,6 +6,8 @@
     <link rel="stylesheet" type="text/css" href="css/common.css"/>
     <link rel="stylesheet" type="text/css" href="css/main.css"/>
     <script type="text/javascript" src="js/libs/modernizr.min.js"></script>
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    
 </head>
 <body>
 <div class="topbar-wrap white">
@@ -58,4 +60,18 @@
         </div>
     </div>
     <!--/sidebar-->
+    <script>
+    
+    function selectAll(){ 
+    console.log($("#SelectAll").attr("checked"));
+	if ($("#SelectAll").attr("checked")) {  
+		//$(".result-tab").eq(":checkbox").attr("checked", true);  
+	} else {  
+		//$(":checkbox").attr("checked", false);  
+		//$(".tc").eq(":checkbox").attr("checked", false);
+		//console.log($(".tc").eq(":checkbox").html());
+
+	}  
+    }  
+    </script>
    
