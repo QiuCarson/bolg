@@ -6,21 +6,23 @@
         </div>
         <div class="result-wrap">
             <div class="result-content">
-                <form action="/jscss/admin/design/add" method="post" id="myform" name="myform" enctype="multipart/form-data">
+                <form action="/admin/articles_add_do" method="post" id="myform" name="myform">
                     <table class="insert-tab" width="100%">
                         <tbody><tr>
-                            <th width="120"><i class="require-red">*</i>分类：</th>
+                            <th width="120"><i class="require-red">*</i>栏目：</th>
                             <td>
-                                <select name="colId" id="catid" class="required">
+                                <select name="articles_category" id="catid" class="required">
                                     <option value="">请选择</option>
-                                    <option value="19">精品界面</option><option value="20">推荐界面</option>
+					<% for(i=0;i<categorys.length;i++){%>
+                                    <option value="<%- categorys[i]._id %>"><%- categorys[i].categorys_name%></option>
+				    <% }%>
                                 </select>
                             </td>
                         </tr>
                             <tr>
                                 <th><i class="require-red">*</i>标题：</th>
                                 <td>
-                                    <input class="common-text required" id="title" name="title" size="50" value="" type="text">
+                                    <input class="common-text required" id="title" name="articles_title" size="50" value="" type="text">
                                 </td>
                             </tr>
                             <tr>
@@ -33,7 +35,7 @@
                             </tr>
                             <tr>
                                 <th>内容：</th>
-                                <td><textarea name="content" class="common-textarea" id="content" cols="30" style="width: 98%;" rows="10"></textarea></td>
+                                <td><textarea name="articles_text" class="common-textarea" id="content" cols="30" style="width: 98%;" rows="10"></textarea></td>
                             </tr>
                             <tr>
                                 <th></th>

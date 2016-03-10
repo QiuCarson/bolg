@@ -34,7 +34,9 @@ rs_navigations='';
 	Navigations.find(function (err, navigations) {
 		if (err) return next(err);	
 		rs_navigations=navigations;
-		
+		for(i=0;i<rs_navigations.length;i++){
+			//navigations_arr[rs_navigations[i]._id]=rs_navigations[i]._categorys_name;
+		}		
 	});
 /***ÈÕÆÚ**/
 articles_right_date='';
@@ -79,19 +81,20 @@ router.get('/', function (req, res, next) {
 	
 	//ÎÄÕÂ
 	Articles.find(function (err, articles) {
-		if (err) return next(err);	
+		if (err) return next(err);
 		rs_articles=articles;
+		res.render('index', {
+		  options_keyword: rs_index_options_keyword,
+		  options_title: rs_index_options_title,
+		  options_description: rs_index_options_description,
+		  categorys: rs_categorys,
+		  articles: rs_articles,
+		  navigations: rs_navigations,
+		  articles_right_date:articles_right_date
+	   });
 	}).sort({'createtime':-1}).limit(5);
 
-  res.render('index', {
-      options_keyword: rs_index_options_keyword,
-	  options_title: rs_index_options_title,
-	  options_description: rs_index_options_description,
-	  categorys: rs_categorys,
-	  articles: rs_articles,
-	  navigations: rs_navigations,
-	  articles_right_date:articles_right_date
-   });
+  
   
    
 });

@@ -7,14 +7,14 @@
 						<article class="post post-1">
 							<header class="entry-header">
 								<h1 class="entry-title">
-									<a href="single.html"><%= articles[i].articles_title %></a>
+									<a href="/articles/<%= articles[i]._id %>"><%= articles[i].articles_title %></a>
 								</h1>
 								<div class="entry-meta">
-									<span class="post-category"><a href="#"><%= articles[i].articles_category %></a></span>
+									<span class="post-category"><a href="/categorys/<%= categorys[i].categorys_url %>"><%= articles[i].articles_category %></a></span>
 			
-									<span class="post-date"><a href="#"><time class="entry-date" datetime="<%= articles[i].createtime.toLocaleDateString() %>"><%= articles[i].createtime.toLocaleDateString() %></time></a></span>
+									<span class="post-date"><time class="entry-date" datetime="<%= articles[i].createtime.toLocaleDateString() %>"><%= articles[i].createtime.toLocaleDateString() %></time></span>
 			
-									<span class="post-author"><a href="#"><%= articles[i].author %></a></span>
+									<span class="post-author"><%= articles[i].author %></span>
 			
 									<span class="comments-link"><a href="#">4 Comments</a></span>
 								</div>

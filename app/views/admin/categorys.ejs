@@ -28,7 +28,7 @@
             <form name="myform" id="myform" method="post">
                 <div class="result-title">
                     <div class="result-list">
-                        <a href="/admin/categorys_add"><i class="icon-font"></i>新增作品</a>
+                        <a href="/admin/categorys_add"><i class="icon-font"></i>新增栏目</a>
                         <a id="batchDel" href="javascript:void(0)"><i class="icon-font"></i>批量删除</a>
                         <a id="updateOrd" href="javascript:void(0)"><i class="icon-font"></i>更新排序</a>
                     </div>
@@ -41,29 +41,33 @@
                             <th>栏目名称</th>
                             <th>栏目链接</th>
                             <th>栏目关键字</th>
-                            <th>栏目名称</th>                            
+                            <th>栏目描述</th>                            
                             <th>操作</th>
                         </tr>
+			<% for(i=0;i<list.length;i++){%>
                         <tr>
                             <td class="tc"><input name="id[]" value="59" type="checkbox"></td>
                             <td>
                                 <input name="ids[]" value="59" type="hidden">
                                 <input class="common-input sort-input" name="ord[]" value="0" type="text">
                             </td>
-                            <td>59</td>
-                            <td title="发哥经典"><a target="_blank" href="#" title="发哥经典">发哥经典</a> …
-                            </td>
-                            <td>0</td>
-                            <td>2</td>
+                            <td><%= list[i].categorys_name %></td>
+                            <td ><%= list[i].categorys_url %> </td>
+                            <td><%= list[i].categorys_keyword %></td>
+                            <td><%= list[i].categorys_discription %></td>
                             
                             <td>
                                 <a class="link-update" href="#">修改</a>
                                 <a class="link-del" href="#">删除</a>
                             </td>
                         </tr>
+			<% }%>
                        
                     </table>
-                    <div class="list-page"> 2 条 1/1 页</div>
+                    <div class="list-page">
+		  
+		    <%- pagehtml%>
+		    </div>
                 </div>
             </form>
         </div>

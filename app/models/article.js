@@ -4,7 +4,7 @@ var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
 var ArticlesSchema = new Schema({
-	_id:  Schema.Types.ObjectId ,
+	//_id:  Schema.Types.ObjectId ,
   articles_title: String,
   articles_url: String,
   articles_text: String,

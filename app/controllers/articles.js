@@ -100,17 +100,18 @@ router.get('/articles/:articles_id', function (req, res, next) {
 	Articles.findOne({_id:id},function(err, articles){
 		rs_articles=articles;
 		//console.log(articles.articles_category);
+		res.render('articles', {
+		  options_keyword: rs_index_options_keyword,
+		  options_title: rs_index_options_title,
+		  options_description: rs_index_options_description,
+		  categorys: rs_categorys,
+		  articles: rs_articles,
+		  navigations: rs_navigations,
+		  articles_right_date:articles_right_date
+	   });
 	})
-console.log(rs_articles);
-  res.render('articles', {
-      options_keyword: rs_index_options_keyword,
-	  options_title: rs_index_options_title,
-	  options_description: rs_index_options_description,
-	  categorys: rs_categorys,
-	  articles: rs_articles,
-	  navigations: rs_navigations,
-	  articles_right_date:articles_right_date
-   });
+//console.log(rs_articles);
+  
   
  
    

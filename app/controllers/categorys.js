@@ -81,9 +81,7 @@ router.get('/categorys/:categorys_url', function (req, res, next) {
 	Articles.find({articles_category:req.params.categorys_url},function (err, articles) {
 		if (err) return next(err);	
 		rs_articles=articles;
-	}).sort({'createtime':-1}).limit(5);
-console.log(rs_articles);
-  res.render('index', {
+		res.render('index', {
       options_keyword: rs_index_options_keyword,
 	  options_title: rs_index_options_title,
 	  options_description: rs_index_options_description,
@@ -92,6 +90,9 @@ console.log(rs_articles);
 	  navigations: rs_navigations,
 	  articles_right_date:articles_right_date
    });
+	}).sort({'createtime':-1}).limit(5);
+//console.log(rs_articles);
+  
   
    
 });

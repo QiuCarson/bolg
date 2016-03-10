@@ -4,4 +4,9 @@ nodejs 学习博客
 
 本博客主要用来学习
 
+1）mongodb排序的那个字段没有数据（字段没有），不显示这条数据
+
+2）数据显示延迟的问题，要把模板渲染放到，查询里面
+
+参考：
 https://github.com/nswbmw/N-blog/wiki/%E7%AC%AC1%E7%AB%A0--%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E5%8D%9A%E5%AE%A2
