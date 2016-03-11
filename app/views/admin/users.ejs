@@ -1,0 +1,59 @@
+<% include header %>
+    <div class="main-wrap">
+
+        <div class="crumb-wrap">
+            <div class="crumb-list"><i class="icon-font"></i><a href="/admin/index">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">栏目管理</span></div>
+        </div>
+       
+        <div class="result-wrap">
+            <form name="myform" id="myform" method="post">
+                <div class="result-title">
+                    <div class="result-list">
+                        <a href="/admin/categorys_add"><i class="icon-font"></i>新增栏目</a>
+                        <a id="batchDel" href="javascript:void(0)"><i class="icon-font"></i>批量删除</a>
+                        <a id="updateOrd" href="javascript:void(0)"><i class="icon-font"></i>更新排序</a>
+                    </div>
+                </div>
+                <div class="result-content">
+                    <table class="result-tab" width="100%">
+                        <tr>
+                            <th class="tc" width="5%"><input class="allChoose" name="" type="checkbox"></th>
+                            <th>排序</th>
+			    <th>序号</th>
+                            <th>栏目名称</th>
+                            <th>栏目链接</th>
+                            <th>栏目关键字</th>
+                            <th>栏目描述</th>                            
+                            <th>操作</th>
+                        </tr>
+			<% for(i=0;i<list.length;i++){%>
+                        <tr>
+                            <td class="tc"><input name="id[]" value="<%= list[i]._id %>" type="checkbox"></td>
+                            <td>
+                                <input name="ids[]" value="<%= list[i]._id %>" type="hidden">
+                                <input class="common-input sort-input" name="ord[]" value="0" type="text">
+                            </td>
+			    <td><%= i+1+(page-1)*pagesize %></td>
+                            <td><%= list[i].categorys_name %></td>
+                            <td ><%= list[i].categorys_url %> </td>
+                            <td><%= list[i].categorys_keyword %></td>
+                            <td><%= list[i].categorys_discription %></td>
+                            
+                            <td>
+                                <a class="link-update" href="#">修改</a>
+                                <a class="link-del" href="#">删除</a>
+                            </td>
+                        </tr>
+			<% }%>
+                       
+                    </table>
+                    <div class="list-page">
+		  
+		    <%- pagehtml%>
+		    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--/main-->
+<% include footer %>

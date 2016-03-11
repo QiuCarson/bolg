@@ -1,7 +1,8 @@
 var express = require('express'),
   router = express.Router(),
   mongoose = require('mongoose'),
-  Categorys = mongoose.model('Categorys');
+  Categorys = mongoose.model('Categorys'),
+  Users = mongoose.model('Users'),
   Articles = mongoose.model('Articles');
 var Paginate = require("../../common/paginate");
 
@@ -9,10 +10,31 @@ module.exports = function (app) {
   app.use('/', router);
 };
 var pagesize=7;
-router.get('/admin*',checkLogin);
+router.get('/admin*',checkLogin);//权限控制
 router.get('/admin/index', function (req, res, next) {	
   res.render("admin/index");
 });
+/***用户管理***/
+router.get('/admin/users', function (req, res, next) {
+	var page = req.query.p ? parseInt(req.query.p) : 1;
+	Users.count(function(err,rs){
+		users_count=rs;
+	});
+	Users.find(function(err,rs){
+		if (err) return next(err);
+		Users_list=rs;
+		pagehtml=new Paginate(articles_count,pagesize,page);
+		res.render("admin/users",{
+			list:articles_list,
+			count:users_count,
+			page:page,
+			maxpage:Math.ceil(users_count/pagesize),
+			pagehtml:pagehtml.phtml,
+			pagesize:pagesize
+		});
+	}).sort({'_id':-1}).skip((page - 1)*pagesize).limit(pagesize);
+})
+/***文章***/
 router.get('/admin/articles', function (req, res, next) {
 	var page = req.query.p ? parseInt(req.query.p) : 1;
 		
@@ -32,8 +54,7 @@ router.get('/admin/articles', function (req, res, next) {
 		pagehtml:pagehtml.phtml,
 		pagesize:pagesize
 		});
-	}).sort({'_id':-1}).skip((page - 1)*pagesize).limit(pagesize);
-	
+	}).sort({'_id':-1}).skip((page - 1)*pagesize).limit(pagesize);	
 	
 });
 router.post('/admin/articles_do', function (req, res, next) {
@@ -41,11 +62,10 @@ router.post('/admin/articles_do', function (req, res, next) {
 })
 
 router.get('/admin/articles_add', function (req, res, next) {
-  /***��Ŀ*****/
+  
 	Categorys.find({categorys_name:{$ne:null}},function (err, rs) {
 		if (err) return next(err);	
 		categorys=rs;
-		//console.log(req.session.admininfo.users_password);
 		res.render("admin/articles_add",{categorys:categorys,author:req.session.admininfo.users_username});
 	});
   
@@ -74,17 +94,14 @@ list='';
 count='';
 categorys_count='';
 categorys_list='';
-
+/***栏目***/
 router.get('/admin/categorys', function (req, res, next) {
 	var page = req.query.p ? parseInt(req.query.p) : 1;
-	//console.log(page);
 	Categorys.count(function(err,rs){
-		//console.log(rs);
 		categorys_count=rs;
 	});
 	Categorys.find(function(err,rs){
 		if (err) return next(err);
-		//console.log(rs);
 		categorys_list=rs;
 		pagehtml=new Paginate(categorys_count,pagesize,page);
 		res.render("admin/categorys",{
@@ -112,7 +129,6 @@ router.post('/admin/categorys_add_do', function (req, res, next) {
 	  categorys_keyword:keyword,
 	  categorys_discription:discription
 	  };
- // console.log(req.body);
   Categorys.create(obj,function(err){
 	if (err) return next(err);
 	res.redirect("/admin/categorys");
@@ -120,7 +136,7 @@ router.post('/admin/categorys_add_do', function (req, res, next) {
 });
 
 
-
+/**权限控制**/
 function checkLogin(req, res, next) {	
   if (!req.session.admininfo) {
     //res.redirect('/login');

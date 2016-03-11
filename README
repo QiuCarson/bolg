@@ -7,6 +7,7 @@ nodejs 学习博客
 1）mongodb排序的那个字段没有数据（字段没有），不显示这条数据
 
 2）数据显示延迟的问题，要把模板渲染放到，查询里面
+npm list -g --depth 0
 
 npm update express-session --save-dev
 参考：
